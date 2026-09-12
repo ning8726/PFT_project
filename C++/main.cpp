@@ -36,11 +36,13 @@ int main() {
 
         balance = balance - expense;
 
-        std::cout << "Expense added!" << std::endl;\
+        std::cout << "Expense added!" << std::endl;
         std::cout << "Current Balance: $" << balance << std::endl;
     }
     else if (choice == 3) {
         std::cout << "You chose View Summary." << std::endl;
+        std::cout << "Current Balance: $" << balance << std::endl;
+    
     }
     else if (choice == 4) {
         std::cout << "You chose Exit. Goodbye!" <<std::endl;
