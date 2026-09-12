@@ -3,18 +3,21 @@
 int main();
 int main() {
 
-    std::cout << "-------------------------" << std::endl;
-    std::cout << "Personal Finance Tracker" << std::endl;
-    std::cout << "-------------------------\n" << std::endl;
-    std::cout << "1. Add Income" << std::endl;
-    std::cout << "2. Add Expense" << std::endl;
-    std::cout << "3. View Summary" << std::endl;
-    std::cout << "4. Exit\n" << std::endl;
-    std::cout << "Choose your option: " << std::endl;
+    
 
     double balance = 0;
-    int choice;
-    std::cin >> choice;
+    int choice = 0;
+    while (choice != 4) {
+        std::cout << "-------------------------" << std::endl;
+        std::cout << "Personal Finance Tracker" << std::endl;
+        std::cout << "-------------------------\n" << std::endl;
+        std::cout << "1. Add Income" << std::endl;
+        std::cout << "2. Add Expense" << std::endl;
+        std::cout << "3. View Summary" << std::endl;
+        std::cout << "4. Exit\n" << std::endl;
+        std::cout << "Choose your option: " << std::endl;
+
+        std::cin >> choice;
 
     if (choice == 1) {
         std::cout << "You chose Add Income." << std::endl;
@@ -47,7 +50,7 @@ int main() {
     else if (choice == 4) {
         std::cout << "You chose Exit. Goodbye!" <<std::endl;
     }
-    
+}
   
 
 
