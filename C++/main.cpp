@@ -48,11 +48,25 @@ int main() {
     
     }
     else if (choice == 4) {
-        std::cout << "You chose Exit. Goodbye!" <<std::endl;
+
+        std::cout << "Are you sure you want to exit? (y/n): " << std::endl;
+        char exitChoice;
+        std::cin >> exitChoice;
+        if (exitChoice == 'y') {
+            std::cout << "You chose Exit. Goodbye!" << std::endl;
+            choice = 4;
+        }
+        else if (exitChoice == 'n') {
+            std::cout << "Returning to main menu" << std::endl;
+            choice = 0;
+        }
+        else {
+            std::cout << "Invalid input. Returning to main menu" << std::endl;
+            choice = 0;
+        }
     }
 }
   
-
 
 
 
