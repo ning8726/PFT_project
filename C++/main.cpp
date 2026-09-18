@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 
 int main();
 int main() {
@@ -6,6 +7,9 @@ int main() {
     
 
     double balance = 0;
+    std::ifstream file("balance.txt");
+    file >> balance;
+    file.close();
     int choice = 0;
     while (choice != 4) {
         std::cout << "-------------------------" << std::endl;
@@ -53,6 +57,9 @@ int main() {
         char exitChoice;
         std::cin >> exitChoice;
         if (exitChoice == 'y') {
+            std::ofstream file ("balance.txt");
+            file << balance;
+            file.close();
             std::cout << "You chose Exit. Goodbye!" << std::endl;
             choice = 4;
         }
