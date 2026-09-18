@@ -10,7 +10,7 @@ int main() {
     std::ifstream file("balance.txt");
     file >> balance;
     file.close();
-    int choice = 0;
+    double choice = 0;
     while (choice != 4) {
         std::cout << "-------------------------" << std::endl;
         std::cout << "Personal Finance Tracker" << std::endl;
@@ -25,10 +25,14 @@ int main() {
 
     if (choice == 1) {
         std::cout << "You chose Add Income." << std::endl;
-        double income;
-        std::cout << "Enter income amount: " << std::endl;
-        std::cin >> income;
-
+        double income = 0;
+        while (income <= 0) {
+            std::cout << "Enter income amount: " << std::endl;
+            std::cin >> income;
+            if (income <= 0) {
+                std::cout << "Invalid amount. Please enter a positive value." << std::endl;
+        }
+    }
         balance = balance + income;
 
         std::cout << "Income added!" << std::endl;
@@ -37,9 +41,14 @@ int main() {
     }
     else if (choice == 2) {
         std::cout << "You chose Add Expense." << std::endl;
-        double expense;
-        std::cout << "Enter expense amount: " << std::endl;
-        std:: cin >> expense;
+        double expense = 0;
+        while (expense <= 0) {
+            std::cout << "Enter expense amount: " << std::endl;
+            std::cin >> expense;
+            if (expense <= 0) {
+                std::cout << "Invalid amount. Please enter a positive value." << std::endl;
+            }
+        }
 
         balance = balance - expense;
 
@@ -71,6 +80,9 @@ int main() {
             std::cout << "Invalid input. Returning to main menu" << std::endl;
             choice = 0;
         }
+    }
+    else {
+        std::cout << "Invalid choice. Please choose 1-4." << std::endl;
     }
 }
   
