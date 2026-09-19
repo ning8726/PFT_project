@@ -1,5 +1,7 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
+#include <cmath>
 
 int main();
 int main() {
@@ -7,6 +9,7 @@ int main() {
     
 
     double balance = 0;
+    std::vector<double> transactions;
     std::ifstream file("balance.txt");
     file >> balance;
     file.close();
@@ -34,6 +37,7 @@ int main() {
         }
     }
         balance = balance + income;
+        transactions.push_back(income);
 
         std::cout << "Income added!" << std::endl;
         std::cout << "Current Balance: $" << balance << std::endl;
@@ -51,6 +55,7 @@ int main() {
         }
 
         balance = balance - expense;
+        transactions.push_back(-expense);
 
         std::cout << "Expense added!" << std::endl;
         std::cout << "Current Balance: $" << balance << std::endl;
@@ -58,6 +63,14 @@ int main() {
     else if (choice == 3) {
         std::cout << "You chose View Summary." << std::endl;
         std::cout << "Current Balance: $" << balance << std::endl;
+        for (double transaction : transactions) {
+            if (transaction > 0) {
+                std::cout << "Income: $" << transaction << std::endl;
+            }
+            else {
+                std::cout << "Expense: $" << std::abs(transaction) << std::endl;
+            }
+        }
     
     }
     else if (choice == 4) {
