@@ -13,6 +13,12 @@ int main() {
     std::ifstream file("balance.txt");
     file >> balance;
     file.close();
+    std::ifstream transFile("transactions.txt");
+    double transaction;
+    while (transFile >> transaction) {
+        transactions.push_back(transaction);
+    }
+    transFile.close();
     double choice = 0;
     while (choice != 4) {
         std::cout << "-------------------------" << std::endl;
@@ -38,6 +44,9 @@ int main() {
     }
         balance = balance + income;
         transactions.push_back(income);
+        std::ofstream transFile("transactions.txt", std::ios::app);
+        transFile << income << std::endl;
+        transFile.close();
 
         std::cout << "Income added!" << std::endl;
         std::cout << "Current Balance: $" << balance << std::endl;
@@ -56,6 +65,9 @@ int main() {
 
         balance = balance - expense;
         transactions.push_back(-expense);
+        std::ofstream transFile("transactions.txt", std::ios::app);
+        transFile << -expense << std::endl;
+        transFile.close();
 
         std::cout << "Expense added!" << std::endl;
         std::cout << "Current Balance: $" << balance << std::endl;
