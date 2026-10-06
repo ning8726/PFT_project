@@ -1,4 +1,7 @@
 #include <iostream>
+#include <fstream>
+#include <vector>
+#include <cmath>
 
 int main();
 int main() {
@@ -6,7 +9,17 @@ int main() {
     
 
     double balance = 0;
-    int choice = 0;
+    std::vector<double> transactions;
+    std::ifstream file("balance.txt");
+    file >> balance;
+    file.close();
+    std::ifstream transFile("transactions.txt");
+    double transaction;
+    while (transFile >> transaction) {
+        transactions.push_back(transaction);
+    }
+    transFile.close();
+    double choice = 0;
     while (choice != 4) {
         std::cout << "-------------------------" << std::endl;
         std::cout << "Personal Finance Tracker" << std::endl;
@@ -21,11 +34,19 @@ int main() {
 
     if (choice == 1) {
         std::cout << "You chose Add Income." << std::endl;
-        double income;
-        std::cout << "Enter income amount: " << std::endl;
-        std::cin >> income;
-
+        double income = 0;
+        while (income <= 0) {
+            std::cout << "Enter income amount: " << std::endl;
+            std::cin >> income;
+            if (income <= 0) {
+                std::cout << "Invalid amount. Please enter a positive value." << std::endl;
+        }
+    }
         balance = balance + income;
+        transactions.push_back(income);
+        std::ofstream transFile("transactions.txt", std::ios::app);
+        transFile << income << std::endl;
+        transFile.close();
 
         std::cout << "Income added!" << std::endl;
         std::cout << "Current Balance: $" << balance << std::endl;
@@ -33,11 +54,20 @@ int main() {
     }
     else if (choice == 2) {
         std::cout << "You chose Add Expense." << std::endl;
-        double expense;
-        std::cout << "Enter expense amount: " << std::endl;
-        std:: cin >> expense;
+        double expense = 0;
+        while (expense <= 0) {
+            std::cout << "Enter expense amount: " << std::endl;
+            std::cin >> expense;
+            if (expense <= 0) {
+                std::cout << "Invalid amount. Please enter a positive value." << std::endl;
+            }
+        }
 
         balance = balance - expense;
+        transactions.push_back(-expense);
+        std::ofstream transFile("transactions.txt", std::ios::app);
+        transFile << -expense << std::endl;
+        transFile.close();
 
         std::cout << "Expense added!" << std::endl;
         std::cout << "Current Balance: $" << balance << std::endl;
@@ -45,6 +75,14 @@ int main() {
     else if (choice == 3) {
         std::cout << "You chose View Summary." << std::endl;
         std::cout << "Current Balance: $" << balance << std::endl;
+        for (double transaction : transactions) {
+            if (transaction > 0) {
+                std::cout << "Income: $" << transaction << std::endl;
+            }
+            else {
+                std::cout << "Expense: $" << std::abs(transaction) << std::endl;
+            }
+        }
     
     }
     else if (choice == 4) {
@@ -53,6 +91,9 @@ int main() {
         char exitChoice;
         std::cin >> exitChoice;
         if (exitChoice == 'y') {
+            std::ofstream file ("balance.txt");
+            file << balance;
+            file.close();
             std::cout << "You chose Exit. Goodbye!" << std::endl;
             choice = 4;
         }
@@ -65,9 +106,11 @@ int main() {
             choice = 0;
         }
     }
+    else {
+        std::cout << "Invalid choice. Please choose 1-4." << std::endl;
+    }
 }
-
-
+  
 
 
 

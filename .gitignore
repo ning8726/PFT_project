@@ -1,0 +1,4 @@
+*.exe
+.vscode/
+balance.txt
+transactions.txt
