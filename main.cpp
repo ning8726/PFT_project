@@ -74,16 +74,40 @@ int main() {
     }
     else if (choice == 3) {
         std::cout << "You chose View Summary." << std::endl;
-        std::cout << "Current Balance: $" << balance << std::endl;
-        for (double transaction : transactions) {
-            if (transaction > 0) {
-                std::cout << "Income: $" << transaction << std::endl;
-            }
-            else {
-                std::cout << "Expense: $" << std::abs(transaction) << std::endl;
-            }
+        
+        int summaryChoice = 0;
+        
+        std::cout << "1. View Balance" << std::endl;
+        std::cout << "2. View Transaction History" << std::endl;
+        std::cout << "3. Back to Main Menu" << std::endl;
+        std::cout << "Choose your option: " << std::endl;
+        std::cin >> summaryChoice;
+        if (summaryChoice == 1) {
+            std::cout << "Current Balance: $" << balance << std::endl;
         }
-    
+        else if (summaryChoice == 2) {
+            std::cout << "Transaction History:" << std::endl;
+            int transactionNumber{1};
+            double totalIncome{0};
+            double totalExpense{0};
+            for (double transaction : transactions) {
+                if (transaction > 0) {
+                    std::cout << transactionNumber << ". Income: $" << transaction << std::endl;
+                    totalIncome += transaction;
+                }
+                else {
+                    std::cout << transactionNumber << ". Expense: $" << std::abs(transaction) << std::endl;
+                    totalExpense += std::abs(transaction);
+                }
+                transactionNumber++;
+            }
+            std::cout << "Total Income: $" << totalIncome << std::endl;
+            std::cout << "Total Expense: $" << totalExpense << std::endl;
+            std::cout << "Current Balance: $" << balance << std::endl;
+        }
+        else if (summaryChoice == 3) {
+            std::cout << "Returning to main menu." << std::endl;
+        }
     }
     else if (choice == 4) {
 
